@@ -4,46 +4,27 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.XmlType;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.ArrayList;
-
 
 @XmlType(propOrder = {"fields"})
 public class XmlRow {
+
+    @XmlElement(name = "field")
+    public List<Field> fields = new ArrayList<>();
+
     @XmlTransient
-    private Map<String, String> entries = new LinkedHashMap<>();
+    public Map<String, String> entries = new LinkedHashMap<>();
 
     public XmlRow() {}
 
     public XmlRow(Map<String, String> entries) {
         this.entries = entries;
-    }
-
-    @XmlElement(name = "field")
-    public List<Field> getFields() {
-        return entries.entrySet().stream()
-                .map(e -> new Field(e.getKey(), e.getValue()))
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public void setFields(List<Field> fields) {
-        System.out.println(">>> setFields вызван с " + fields.size() + " элементов:");
-        for (Field f : fields) {
-            System.out.println("    - " + f.key + " = " + f.value);
+        this.fields = new ArrayList<>();
+        for (Map.Entry<String, String> e : entries.entrySet()) {
+            this.fields.add(new Field(e.getKey(), e.getValue()));
         }
-
-        Map<String, String> newMap = new LinkedHashMap<>();
-        for (Field f : fields) {
-            newMap.put(f.key, f.value);
-        }
-        this.entries = newMap;
-    }
-
-
-    public Map<String, String> toMap() {
-        return entries;
     }
 }

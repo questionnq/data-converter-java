@@ -41,8 +41,10 @@ public class TXTConverter {
     public static void write(UniversalDataFormat data, String outputTxtPath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputTxtPath))) {
             List<Map<String, String>> rows = data.getRows();
+            System.out.println(">> Запись TXT. Строк: " + rows.size());
+
             if (rows.isEmpty()) {
-                System.out.println("Нет данных для записи. ");
+                System.out.println("Нет данных для записи.");
                 return;
             }
 
@@ -51,6 +53,7 @@ public class TXTConverter {
             writer.newLine();
 
             for (Map<String, String> row : rows) {
+                System.out.println("  -> строка: " + row);
                 List<String> values = new ArrayList<>();
                 for (String key : headers) {
                     values.add(row.getOrDefault(key, ""));
@@ -59,9 +62,9 @@ public class TXTConverter {
                 writer.newLine();
             }
 
-            System.out.println("Данные успешно записаны в TXT.");
+            System.out.println("TXT успешно записан в: " + outputTxtPath);
         } catch (Exception e) {
-            System.err.println("Ошибка записи в TXT: " + e.getMessage());
+            System.err.println("Ошибка при записи TXT: " + e.getMessage());
         }
     }
 }

@@ -9,6 +9,7 @@ import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 
 import java.io.File;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,11 +34,16 @@ public class XmlConverter {
                 return new UniversalDataFormat(List.of());
             }
 
-
-
             List<Map<String, String>> rows = rowList.getRows().stream()
-                    .map(XmlRow::toMap)
+                    .map(row -> {
+                        Map<String, String> map = new LinkedHashMap<>();
+                        for (Field f : row.fields) {
+                            map.put(f.key, f.value);
+                        }
+                        return map;
+                    })
                     .collect(Collectors.toList());
+
 
             return new UniversalDataFormat(rows);
         } catch (Exception e) {
