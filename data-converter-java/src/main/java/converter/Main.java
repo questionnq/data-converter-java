@@ -23,6 +23,7 @@ public class Main {
             case "json" -> JSONConverter.read(inputPath);
             case "xml" -> XmlConverter.read(inputPath);
 
+
             default -> {
                 System.out.println("Неподдерживаемый формат: " + inputExt);
                 yield null;

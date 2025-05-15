@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rows><row><field key="id" value="1" /><field key="name" value="Alice" /><field key="email" value="alice@example.com" /></row><row><field key="id" value="2" /><field key="name" value="Bob" /><field key="email" value="bob@example.com" /></row><row><field key="id" value="3" /><field key="name" value="Charlie" /><field key="email" value="charlie@example.com" /></row></rows>

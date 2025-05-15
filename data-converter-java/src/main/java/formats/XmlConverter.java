@@ -2,6 +2,7 @@ package formats;
 
 import xmlmodel.XmlRow;
 import xmlmodel.XmlRowList;
+import xmlmodel.Field;
 import core.UniversalDataFormat;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
@@ -18,7 +19,7 @@ public class XmlConverter {
 
     public static UniversalDataFormat read(String inputXmlPath) {
         try {
-            JAXBContext context = JAXBContext.newInstance(XmlRowList.class);
+            JAXBContext context = JAXBContext.newInstance(XmlRowList.class, XmlRow.class, Field.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
 
             XmlRowList rowList = (XmlRowList) unmarshaller.unmarshal(new File(inputXmlPath));
@@ -40,14 +41,15 @@ public class XmlConverter {
 
             return new UniversalDataFormat(rows);
         } catch (Exception e) {
-            System.err.println("Ошибка при чтении XML: " + e.getMessage());
+            System.err.println("Ошибка при чтении XML: ");
+            e.printStackTrace();
             return new UniversalDataFormat(List.of());
         }
     }
 
     public static void write(String outputXmlPath, UniversalDataFormat dataFormat) {
         try {
-            JAXBContext context = JAXBContext.newInstance(XmlRowList.class);
+            JAXBContext context = JAXBContext.newInstance(XmlRowList.class, XmlRow.class, Field.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 

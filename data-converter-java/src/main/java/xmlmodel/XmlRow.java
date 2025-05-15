@@ -7,6 +7,9 @@ import jakarta.xml.bind.annotation.XmlType;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.ArrayList;
+
 
 @XmlType(propOrder = {"fields"})
 public class XmlRow {
@@ -23,15 +26,22 @@ public class XmlRow {
     public List<Field> getFields() {
         return entries.entrySet().stream()
                 .map(e -> new Field(e.getKey(), e.getValue()))
-                .toList();
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public void setFields(List<Field> fields) {
-        entries.clear();
+        System.out.println(">>> setFields вызван с " + fields.size() + " элементов:");
         for (Field f : fields) {
-            entries.put(f.key, f.value);
+            System.out.println("    - " + f.key + " = " + f.value);
         }
+
+        Map<String, String> newMap = new LinkedHashMap<>();
+        for (Field f : fields) {
+            newMap.put(f.key, f.value);
+        }
+        this.entries = newMap;
     }
+
 
     public Map<String, String> toMap() {
         return entries;
