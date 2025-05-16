@@ -1,0 +1,4 @@
+id name email
+1 Алиса alice@example.com
+2 Боб bob@example.com
+3 Чарли charlie@example.com

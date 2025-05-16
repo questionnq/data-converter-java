@@ -5,10 +5,11 @@ import java.util.Map;
 
 public class UniversalDataFormat {
 
-    /**
-     * Данные — список строк, где каждая строка — это map "заголовок → значение".
-     * Например: [ {"id": "1", "name": "Alice"}, ... ]
+    /*
+     данные — список строк, где каждая строка — это map "заголовок - значение".
+      например: [ {"id": "1", "name": "Alice"}, ... ]
      */
+
     private final List<Map<String, String>> rows;
 
     public UniversalDataFormat(List<Map<String, String>> rows) {

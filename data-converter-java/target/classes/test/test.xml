@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rows>
+  <row>
+    <field key="id" value="1"/>
+    <field key="name" value="Алиса"/>
+    <field key="email" value="alice@example.com"/>
+  </row>
+  <row>
+    <field key="id" value="2"/>
+    <field key="name" value="Боб"/>
+    <field key="email" value="bob@example.com"/>
+  </row>
+  <row>
+    <field key="id" value="3"/>
+    <field key="name" value="Чарли"/>
+    <field key="email" value="charlie@example.com"/>
+  </row>
+</rows>
